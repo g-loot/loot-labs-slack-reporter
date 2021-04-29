@@ -11,4 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: 'Add release tag'
-        run: git tag prod-release && git push origin --tags
+        run: git tag prod-release && git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$INPUT_REPO.git" --tags
