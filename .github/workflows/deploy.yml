@@ -11,5 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: 'Add release tag'
-        run: echo $GITHUB_TOKEN
-        run: git tag prod-release && git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$INPUT_REPO.git" --tags
+        run: echo $GITHUB_TOKEN && git tag prod-release && git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$INPUT_REPO.git" --tags
