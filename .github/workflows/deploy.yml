@@ -5,10 +5,11 @@ on:
     branches:
       - master
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
       - name: 'Add release tag'
+        run: echo $GITHUB_TOKEN
         run: git tag prod-release && git push "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$INPUT_REPO.git" --tags
