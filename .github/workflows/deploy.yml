@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Add release tag
         id: release_tag
         uses: anothrNick/github-tag-action@1.13.0
