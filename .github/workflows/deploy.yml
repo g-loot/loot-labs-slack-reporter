@@ -16,6 +16,8 @@ jobs:
         run: npm i
       - name: write deploy message to slack
         run: node scripts/deploy-reporter.js
+        env:
+          SLACK_HOOK_URL: ${{ secrets.SLACK_HOOK_URL }}
       - name: Add release tag
         id: release_tag
         uses: anothrNick/github-tag-action@1.26.0

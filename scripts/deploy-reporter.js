@@ -75,12 +75,17 @@ async function main() {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body),
   });
-  if (res.status > 200 || res.status >= 300)
+  if (res.status < 200 || res.status >= 300)
     throw 'could not send slack message, aborting everything lol';
-    
+
   console.log(res);
 }
-main();
+
+try {
+  main();
+} catch (e) {
+  throw 'could not send slack message, aborting everything lol';
+}
 
 function generateSlackMsg({
   features,
