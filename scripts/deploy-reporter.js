@@ -76,7 +76,9 @@ async function main() {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body),
   });
+  const json = await res.json();
   console.log(res);
+  console.log(JSON.stringify(json));
 }
 main();
 
