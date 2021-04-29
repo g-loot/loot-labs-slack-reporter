@@ -10,6 +10,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Install deps
+        run: npm i
       - name: write deploy message to slack
         run: node scripts/deploy-reporter.js
       - name: Add release tag
@@ -17,4 +19,4 @@ jobs:
         uses: anothrNick/github-tag-action@1.26.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CUSTOM_TAG: prod-release
+          CUSTOM_TAG: prod-release-${{github.sha}}
