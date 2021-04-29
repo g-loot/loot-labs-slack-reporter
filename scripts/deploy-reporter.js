@@ -2,7 +2,7 @@ const { exec } = require('child_process');
 const fetch = require('node-fetch');
 
 const SLACK_HOOK_URL =
-  'https://hooks.slack.com/services/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';
+  'https://hooks.slack.com/services/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';
 
 async function cmd(command) {
   return new Promise((res, rej) => {
@@ -76,9 +76,7 @@ async function main() {
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify(body),
   });
-  const json = await res.json();
   console.log(res);
-  console.log(JSON.stringify(json));
 }
 main();
 
