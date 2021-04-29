@@ -1,0 +1,14 @@
+name: Deploy to prod
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - master
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: 'Add release tag'
+        run: git tag prod-release && git push origin --tags
