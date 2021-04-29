@@ -19,9 +19,12 @@ async function main() {
   const releaseHashShort = await cmd('git rev-parse --short HEAD').then(x =>
     x.trim()
   );
-  const releaseHash = await cmd('git rev-parse HEAD').then(x => x.trim());
+  const previousReleaseTag = await cmd(
+    'git tag --sort=-creatordate | grep "prod-release" | head -n 2 | tail -n 1'
+  ).then(x => x.trim());
+
   const commits = await cmd(
-    `git log --merges --first-parent prod-release-${releaseHash}^..HEAD --format="%H"`
+    `git log --merges --first-parent ${previousReleaseTag}^..HEAD --format="%H"`
   );
 
   const projectName = await cmd(
