@@ -16,8 +16,12 @@ async function cmd(command) {
 }
 
 async function main() {
+  const releaseHashShort = await cmd('git rev-parse --short HEAD').then(x =>
+    x.trim()
+  );
+  const releaseHash = await cmd('git rev-parse HEAD').then(x => x.trim());
   const commits = await cmd(
-    'git log --merges --first-parent prod-release^..HEAD --format="%H"'
+    `git log --merges --first-parent prod-release-${releaseHash}^..HEAD --format="%H"`
   );
 
   const projectName = await cmd(
@@ -25,9 +29,6 @@ async function main() {
   ).then(x => x.trim());
 
   const projectUrl = `https://github.com/g-loot/${projectName}`;
-  const releaseHash = await cmd('git rev-parse --short HEAD').then(x =>
-    x.trim()
-  );
 
   const promises = commits
     .trim()
@@ -58,7 +59,7 @@ async function main() {
 
   const message = generateSlackMsg({
     features,
-    version: releaseHash,
+    version: releaseHashShort,
     projectUrl,
     projectName,
     date: new Date().toISOString().slice(0, 10),
