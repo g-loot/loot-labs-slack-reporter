@@ -42,18 +42,21 @@ async function main() {
       const [, pullRequest, branchName, description] = message.match(
         baseRegexp
       );
-      const ticketUrl = branchName.match(branchRegexp)[1]
-        ? `https://gloot.atlassian.net/browse/${
-            branchName.match(branchRegexp)[1]
-          }`
+
+      const ticketMatches = branchName.match(branchRegexp);
+
+      const ticketId = ticketMatches ? branchName.match(branchRegexp)[1] : null;
+      const ticketUrl = ticketMatches
+        ? `https://gloot.atlassian.net/browse/${ticketId}`
         : null;
+
       const prUrl = `https://github.com/g-loot/${projectName}/pull/${pullRequest}`;
       return {
         branchName,
         description,
         prUrl,
         ticketUrl,
-        ticketId: branchName.match(branchRegexp)[1],
+        ticketId,
       };
     });
 
