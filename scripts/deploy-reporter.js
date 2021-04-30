@@ -2,7 +2,7 @@ const { exec } = require("child_process");
 const fetch = require("node-fetch");
 
 const SLACK_HOOK_URL = process.env.SLACK_HOOK_URL;
-console.log("slack hook url: ", SLACK_HOOK_URL);
+console.log("last 4 chars of slack hook url: ", SLACK_HOOK_URL.slice(-10));
 async function cmd(command) {
   return new Promise((res, rej) => {
     exec(command, (error, stdout, stderr) => {
@@ -80,7 +80,7 @@ async function main() {
   });
   if (res.status < 200 || res.status >= 300) {
     console.log(res);
-    throw "bad response";
+    process.exit(1);
   }
 }
 
