@@ -2,7 +2,7 @@ const { exec } = require("child_process");
 const fetch = require("node-fetch");
 
 const SLACK_HOOK_URL = process.env.SLACK_HOOK_URL;
-console.log("last 5 chars of hook url: ", SLACK_HOOK_URL.slice(-5));
+console.log("slack hook url: ", SLACK_HOOK_URL);
 async function cmd(command) {
   return new Promise((res, rej) => {
     exec(command, (error, stdout, stderr) => {
